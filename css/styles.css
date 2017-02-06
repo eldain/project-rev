@@ -54,7 +54,7 @@
 .ba {
     border-style: solid;
     border-width: 1px;
-    background-color: #f4f4f4;
+    background-color: #f4f4f4; /*added*/
 }
 
 .bt {
@@ -67,7 +67,7 @@
 }
 
 .br3 {
-    border-radius: none;
+    border-radius: none; /*changed from .5rem*/
 }
 
 .br--top {
@@ -111,8 +111,8 @@
 }
 
 .mv4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem; /*changed from 2rem*/
+    margin-bottom: 1rem; /*changed from 2rem*/
 }
 
 .f4 {
