@@ -5,11 +5,30 @@ $(document).ready(function(){
 	// Should probably remove the start address and destination address after plugging them into API, that way we won't run into any weird errors when reassigning session variables
 	console.log(startAddress, destinationAddress);
 
-	var distanceSource = `	http://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${startAddress}&destinations=${destinationAddress}&key=AIzaSyDBBsE9Lyrdf3WeL1VST4Edc6WRauyIygA`;
+	function getDistance()
+	  {
+	     //Find the distance
+	     var distanceService = new google.maps.DistanceMatrixService();
+	     distanceService.getDistanceMatrix({
+	        origins: [startAddress],
+	        destinations: [destinationAddress],
+	        travelMode: google.maps.TravelMode.DRIVING,
+	        unitSystem: google.maps.UnitSystem.IMPERIAL,
+	        durationInTraffic: true,
+	        avoidHighways: false,
+	        avoidTolls: false
+	    },
+	    function (response, status) {
+	        if (status !== google.maps.DistanceMatrixStatus.OK) {
+	            console.log('Error:', status);
+	        } else {
+	            // console.log(response);
+							console.log("The distance is: " + response.rows[0].elements[0].distance.text);
+	        }
+	    });
+	  }
 
-	$.get( distanceSource, function( data ) {
-		console.log(data);
-	});
+		getDistance();
 
 	var imageSource = `http://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=11&size=960x960&key=AIzaSyD4u8OfeiUVGO3leigttTSnvFSgDznwZtA`;
 
