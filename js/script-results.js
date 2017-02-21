@@ -1,4 +1,12 @@
 $(document).ready(function(){
+	var startInputSavings = document.querySelector('.start-input-savings');
+	var destinationInputSavings = document.querySelector('.destination-input-savings');
+
+	console.log(startInputSavings, destinationInputSavings);
+
+	new google.maps.places.Autocomplete(startInputSavings);
+	new google.maps.places.Autocomplete(destinationInputSavings);
+
 	var location = sessionStorage.getItem('location');
 	var startAddress = sessionStorage.getItem('startAddress');
 	var destinationAddress = sessionStorage.getItem('destinationAddress');
@@ -28,7 +36,7 @@ $(document).ready(function(){
 	    });
 	  }
 
-		getDistance();
+		// getDistance();
 
 	var imageSource = `http://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=11&size=960x960&key=AIzaSyD4u8OfeiUVGO3leigttTSnvFSgDznwZtA`;
 
