@@ -66,35 +66,65 @@
 	</div>
 
 	<div class="second-panel-savings">
-		<div class="pt4 f2 fw3 tc">Fine tune your trip and see your savings.</div>
-		<div class="items-center relative flex ma6">
-			<article class="center mw4 mw6-ns mh3 br2 hidden ba b--black-10 bg-white fl w-40 shadow-1 display-inline">
+		<form enctype='application/json'>
+		<div class="pt5 f2 fw3 tc">Fine tune your trip and see your savings.</div>
+		<div class="items-center relative flex mh6 mt5 mb4 pt3">
+			<article class="center mw4 mw6-ns mh3 br2 hidden ba b--black-10 bg-white fl h4 w-50 shadow-1 display-inline">
 				<div class="pa3 bt b--black-10">
 					<p class="f6 f5-ns lh-copy measure ml3 tc">
 						How many times a week do you commute this trip?
 					</p>
+					<div class="dropdown">
+				  <select id="commute" name="commute" class="f3 lh-copy ba b--blue">
+				    <option value="1">1</option>
+				    <option value="2">2</option>
+				    <option value="3">3</option>
+						<option value="4">4</option>
+				    <option value="5">5</option>
+				    <option value="6">6</option>
+						<option value="7">7</option>
+				  </select>
+					</div>
 				</div>
 			</article>
-			<article class="center mw4 mw6-ns mh3 br2 hidden ba b--black-10 bg-white fl w-40 shadow-1 display-inline">
+			<article class="center mw4 mw6-ns mh3 br2 hidden ba b--black-10 bg-white fl h4 w-40 shadow-1 display-inline">
 				<div class="pa3 bt b--black-10">
 					<p class="f6 f5-ns lh-copy measure ml3 tc">
 						What does your average fill-up cost?
 					</p>
+					<div id="slidercontainer" class="w3">
+						<input id="slider" type="range" min="0" max="50" step="1" value ="25"/>
+					</div>
 				</div>
 			</article>
 		</div>
-		<div class="items-center relative flex ma6">
+		<div class="items-center relative flex mh6 mt5 mb4">
 			<article class="center mw-100 mw100-ns br2 hidden ba b--black-10 bg-white fl w-80 shadow-1 display-inline">
 				<div class="pa3 bt b--black-10 mt3">
 					<p class="f6 f5-ns lh-copy measure center tc">Finance Options</p>
 				</div>
-				<div class="ph3 f6 f5-ns lh-copy measure center tc mb4">
-					<a class="fl f6 link dim br2 ph3 pv2 mb2 dib white bg-black" href="#0">LOAN</a>
-					<a class="f6 link dim br2 ph3 pv2 mb2 dib white bg-near-black" href="#0">UPFRONT</a>
-					<a class="fr f6 link dim br2 ph3 pv2 mb2 dib white bg-dark-gray" href="#0">DEALER</a>
+				<div class="ph3 f6 f5-ns lh-copy center tc mb4">
+					<ul class="pl0">
+				    <li>
+				        <input type='radio' value='1' name='radio' id='radio1' class='radio'/>
+				        <label for='radio1' class="dib f6 dim white br2 w4 pv4">LOAN</label>
+				    </li>
+				    <li>
+				        <input type='radio' value='2' name='radio'  id='radio2' class='radio'/>
+				        <label for='radio2' class="dib f6 dim white br2 w4 pv4">UPFRONT</label>
+				    </li>
+				    <li>
+				        <input type='radio' value='3' name='radio'  id='radio3' class='radio'/>
+				        <label for='radio3' class="dib f6 dim white br2 w4 pv4">DEALER</label>
+				    </li>
+				</ul>
 				</div>
 			</article>
 		</div>
+		<div class="container">
+		<input type="submit" value="Submit" class="f6 link dim br2 ph3 pv2 mb3 mr3 dib white bg-dark-blue ba b--white-025">
+		</div>
+	</form>
 	</div>
 
 	<!-- why is there a white line that appears between the sections?-->
