@@ -6,6 +6,11 @@
 	background: linear-gradient( 90deg, #08E967, #9B51E0 );
 }
 
+.hr{
+	height:1.5px;
+	background: grey;
+}
+
 .first-panel{
 	height: 500px;
 }
@@ -25,7 +30,7 @@
 }
 
 .third-panel{
-	background-color: lightgrey;
+	background-color: #F2F2F2;
 }
 
 .first-panel-savings{
