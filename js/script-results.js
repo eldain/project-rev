@@ -36,7 +36,7 @@ $(document).ready(function(){
 	    });
 	  }
 
-		// getDistance();
+		getDistance();
 
 	var imageSource = `http://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=11&size=960x960&key=AIzaSyD4u8OfeiUVGO3leigttTSnvFSgDznwZtA`;
 
