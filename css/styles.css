@@ -23,6 +23,11 @@
 	position: absolute;
 	z-index: -1;
 }
+
+.third-panel{
+	background-color: lightgrey;
+}
+
 .first-panel-savings{
 	height: 620px;
 }
