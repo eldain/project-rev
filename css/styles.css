@@ -49,10 +49,130 @@
 	z-index: -1;
 }
 .second-panel-savings{
-	height: 625px;
-  background-color: darkgray;
+	height: 800px;
+  background-color: #F1F1F1;
 }
 .third-panel-savings{
 	height: 900px;
   background-color: slategray;
+}
+
+ul {
+    list-style: none;
+}
+li {
+    display: inline-block;
+    margin-right: 15px;
+}
+.radio {
+    visibility:hidden;
+}
+
+label {
+    cursor: pointer;
+		background: orange;
+}
+input:checked + label {
+    background: #FFD280;
+}
+
+div.container {
+    height: 10em;
+    position: relative;
+}
+div.container input {
+    margin: 0;
+    position: inherit;
+    left: 50%;
+		top: 40%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+}
+
+div.dropdown {
+    position: relative
+}
+div.dropdown select {
+    margin: 0;
+		margin-top: 10px;
+    position: relative;
+    margin-left:50%;
+    transform: translate(-50%, -50%);
+		border-radius: 5px;
+}
+
+#slidercontainer {
+	position: relative;
+	margin: 0 auto;
+
+}
+
+#slider{
+	position:inherit;
+	left: -100%;
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 200px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: orange;
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]{
+    /* fix for FF unable to apply focus style bug  */
+    border: 1px solid white;
+
+    /*required for proper track sizing in FF*/
+    width: 200px;
+}
+
+input[type=range]::-moz-range-track {
+    width: 200px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: orange;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]:focus::-moz-range-track {
+    background: #ccc;
 }
