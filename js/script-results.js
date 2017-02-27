@@ -47,21 +47,29 @@ var electricVehicles = [
 ];
 
 $(document).ready(function(){
-	console.log(electricVehicles[0].model);
-
 	var startInputSavings = document.querySelector('.start-input-savings');
 	var destinationInputSavings = document.querySelector('.destination-input-savings');
+	var commutesPerWeek = document.querySelector('#commutes-per-week');
+	var fullTankCost = document.querySelector('#fill-up-cost');
 
-	// console.log(startInputSavings, destinationInputSavings);
+	commutesPerWeek.onchange=changeEventHandler;
+	fullTankCost.onchange=changeEventHandler;
 
-	new google.maps.places.Autocomplete(startInputSavings);
-	new google.maps.places.Autocomplete(destinationInputSavings);
+	function changeEventHandler(event) {
+	    // You can use “this” to refer to the selected element.
+	    if(!event.target.value) alert('Please Select One');
+	    else console.log(event.target.value + ' trips per week / cost to fill up tank');
+	}
+
+	// Getting weird API error when trying to initialize these autocompletes
+	// new google.maps.places.Autocomplete(startInputSavings);
+	// new google.maps.places.Autocomplete(destinationInputSavings);
 
 	var location = sessionStorage.getItem('location');
 	var startAddress = sessionStorage.getItem('startAddress');
 	var destinationAddress = sessionStorage.getItem('destinationAddress');
 	// Should probably remove the start address and destination address after plugging them into API, that way we won't run into any weird errors when reassigning session variables
-	// console.log(startAddress, destinationAddress);
+	console.log(startAddress, destinationAddress);
 
 	function getDistance()
 	  {
@@ -86,9 +94,8 @@ $(document).ready(function(){
 	    });
 	  }
 
-		// getDistance();
+	getDistance();
 
 	var imageSource = `http://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=11&size=960x960&key=AIzaSyD4u8OfeiUVGO3leigttTSnvFSgDznwZtA`;
-
 	document.styleSheets[1].insertRule(`.first-panel-savings::after { background-image: url("${imageSource}"); }`, 0);
 });
