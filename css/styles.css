@@ -6,11 +6,6 @@
 	background: linear-gradient( 90deg, #08E967, #9B51E0 );
 }
 
-.hr{
-	height:1.5px;
-	background: grey;
-}
-
 .first-panel{
 	height: 500px;
 }
@@ -54,7 +49,7 @@
 }
 .third-panel-savings{
 	height: 900px;
-  background-color: slategray;
+  background-color: white;
 }
 
 ul {
@@ -175,4 +170,12 @@ input[type=range]:-moz-focusring{
 
 input[type=range]:focus::-moz-range-track {
     background: #ccc;
+}
+
+.logo {
+	max-width: 80%;
+}
+
+.car {
+	margin: auto;
 }
