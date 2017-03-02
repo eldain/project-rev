@@ -59,8 +59,8 @@ $(document).ready(function(){
 	var destinationAddress = sessionStorage.getItem('destinationAddress');
 
 	// Getting weird API error when trying to initialize these autocompletes
-	// new google.maps.places.Autocomplete(startInputSavings);
-	// new google.maps.places.Autocomplete(destinationInputSavings);
+	new google.maps.places.Autocomplete(startInputSavings);
+	new google.maps.places.Autocomplete(destinationInputSavings);
 
 	var commutesPerWeek;
 	var fullTankCost;
