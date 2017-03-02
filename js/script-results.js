@@ -68,6 +68,12 @@ var electricVehicles = [
 		"notes": 'luxury sedan'
 	}
 ];
+var prices = [
+	{
+		"gasPrice": 2.284, // National Average Gas Price as of 2/15/2017
+		"electricityPrice": 0.12 // kWH - National average of 12 cents that the EPA uses on its fuel economy label for EVs
+	}
+];
 
 $(document).ready(function(){
 	// ------Start Variables------
@@ -124,12 +130,19 @@ $(document).ready(function(){
 	        }
 	    });
 	  }
-	function calculateSavings(){
-		// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
-		// cent per mile for gas vehicles * distance calculation from above
-		// cent per mile for eletric vehicle * distance calculation from above
-		// subtract
-	}
+		function calculateSavings(distance){
+			console.log(distance);
+			let gasCost = prices[0]["gasPrice"]; // per gallon
+			let electricityPrice = prices[0]["electricityPrice"]; // per kWH
+			let totalMiles = distance * 2  * 52 * 10; // * commutesPerWeek
+			// let gasCost = totalMiles * gasVehicles[0]["capacity"]
+			console.log(gasCost, electricityPrice, totalMiles);
+			// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
+			// cent per mile for gas vehicles * distance calculation from above
+			// cent per mile for eletric vehicle * distance calculation from above
+			// subtract
+			// cost of tank / range of tank * total miles
+		}
 	// ------End Functions------
 
 
