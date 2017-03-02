@@ -4,8 +4,10 @@ var gasVehicles = [
 	"manufacturer": "Honda",
 	"model": "Accord",
 	"msrp": 23000,
+    "monthlylease": 575,
 	"mpg": 32,
-    "capacity": ,
+    "capacity": 396, //12.4G tank capacity x 32MPG = 396.8 miles
+    "link": 'http://automobiles.honda.com/civic-sedan',
 	"notes": "sedan"
 	}
 ];
@@ -14,40 +16,50 @@ var electricVehicles = [
 		"manufacturer": 'BMW',
 		"model": 'i3',
 		"msrp": 48000,
+        "monthlylease": 575,
 		"mpge": 117,
         "range": 80,
+        "link": 'https://www.bmwusa.com/vehicles/bmwi.html',
 		"notes": 'SUV'
 	},
 	{
 		"manufacturer": 'Ford',
 		"model": 'Focus Electric',
 		"msrp": 29100,
+        "monthlylease": 423,
 		"mpge": 107,
         "range": 100,
+        "link": 'http://www.ford.com/cars/focus/2017/models/focus-electric/',
 		"notes": 'this is the baseline EV, hatchback'
 	},
 	{
 		"manufacturer": 'Fiat',
 		"model": '500E',
 		"msrp": 33900,
+        "monthlylease": 444,
 		"mpge": 115,
         "range": 87,
+        "link": 'http://www.fiatusa.com/en/500e/',
 		"notes": '(really) compact car'
 	},
 	{
 		"manufacturer": 'Nissan',
 		"model": 'Leaf',
 		"msrp": 36000,
+        "monthlylease": 273,
 		"mpge": 113,
         "range": 107,
+        "link": 'https://www.nissanusa.com/electric-cars/leaf/',
 		"notes": 'sedan'
 	},
 	{
 		"manufacturer": 'Tesla',
 		"model": 'Model S',
 		"msrp": 69200,
+        "monthlylease": 974,
 		"mpge": 94,
         "range": 210,
+        "link": 'https://www.tesla.com/models',
 		"notes": 'luxury sedan'
 	}
 ];
