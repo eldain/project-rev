@@ -18,7 +18,8 @@ var electricVehicles = [
 		"msrp": 48000,
         "monthlylease": 575,
 		"mpge": 117,
-        "range": 80,
+        "range": 80, //mi
+        "batterycapacity": 33, //kWh
         "link": 'https://www.bmwusa.com/vehicles/bmwi.html',
 		"notes": 'SUV'
 	},
@@ -28,7 +29,8 @@ var electricVehicles = [
 		"msrp": 29100,
         "monthlylease": 423,
 		"mpge": 107,
-        "range": 100,
+        "range": 100, //mi
+        "batterycapacity": 33.5, //kWh
         "link": 'http://www.ford.com/cars/focus/2017/models/focus-electric/',
 		"notes": 'this is the baseline EV, hatchback'
 	},
@@ -38,7 +40,8 @@ var electricVehicles = [
 		"msrp": 33900,
         "monthlylease": 444,
 		"mpge": 115,
-        "range": 87,
+        "range": 87, //mi
+        "batterycapacity": 24, //kWh
         "link": 'http://www.fiatusa.com/en/500e/',
 		"notes": '(really) compact car'
 	},
@@ -48,7 +51,8 @@ var electricVehicles = [
 		"msrp": 36000,
         "monthlylease": 273,
 		"mpge": 113,
-        "range": 107,
+        "range": 107, //mi
+        "batterycapacity": 30, //kWh
         "link": 'https://www.nissanusa.com/electric-cars/leaf/',
 		"notes": 'sedan'
 	},
@@ -58,7 +62,8 @@ var electricVehicles = [
 		"msrp": 69200,
         "monthlylease": 974,
 		"mpge": 94,
-        "range": 210,
+        "range": 210, //mi
+        "batterycapacity": 85, //kWh
         "link": 'https://www.tesla.com/models',
 		"notes": 'luxury sedan'
 	}
