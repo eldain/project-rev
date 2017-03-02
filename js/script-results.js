@@ -5,6 +5,7 @@ var gasVehicles = [
 	"model": "Accord",
 	"msrp": 23000,
 	"mpg": 32,
+    "capacity": ,
 	"notes": "sedan"
 	}
 ];
@@ -13,35 +14,40 @@ var electricVehicles = [
 		"manufacturer": 'BMW',
 		"model": 'i3',
 		"msrp": 48000,
-		"mpg": 117,
+		"mpge": 117,
+        "range": 80,
 		"notes": 'SUV'
 	},
 	{
 		"manufacturer": 'Ford',
 		"model": 'Focus Electric',
 		"msrp": 29100,
-		"mpg": 107,
-		"notes": 'hatchback'
+		"mpge": 107,
+        "range": 100,
+		"notes": 'this is the baseline EV, hatchback'
 	},
 	{
 		"manufacturer": 'Fiat',
 		"model": '500E',
 		"msrp": 33900,
-		"mpg": 115,
+		"mpge": 115,
+        "range": 87,
 		"notes": '(really) compact car'
 	},
 	{
 		"manufacturer": 'Nissan',
 		"model": 'Leaf',
 		"msrp": 36000,
-		"mpg": 113,
+		"mpge": 113,
+        "range": 107,
 		"notes": 'sedan'
 	},
 	{
 		"manufacturer": 'Tesla',
-		"model": 'S',
+		"model": 'Model S',
 		"msrp": 69200,
-		"mpg": 94,
+		"mpge": 94,
+        "range": 210,
 		"notes": 'luxury sedan'
 	}
 ];
