@@ -54,7 +54,7 @@
 }
 .third-panel-savings{
 	height: 900px;
-  background-color: slategray;
+  background-color: white;
 }
 
 ul {
@@ -175,4 +175,12 @@ input[type=range]:-moz-focusring{
 
 input[type=range]:focus::-moz-range-track {
     background: #ccc;
+}
+
+.logo {
+	max-width: 80%;
+}
+
+.car {
+	margin: auto;
 }
