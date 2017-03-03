@@ -22,8 +22,8 @@ $(document).ready(function(){
 
 	function nextPageCheck(){
 		if(startInput.value === "" || destinationInput.value === ""){
-			submitRouteButton.classList.remove("bg-green");
-			submitRouteButton.classList.add("bg-red");
+			submitRouteButton.classList.add("hvr-buzz-out");
+			setTimeout(() => {submitRouteButton.classList.remove("hvr-buzz-out")}, 750);
 		} else window.location.href = "/savings.html";
 	}
 
