@@ -14,8 +14,8 @@ $(document).ready(function(){
 
 	function setAddresses(e){
 		e.preventDefault();
-		var startAddress = startInput.value.split(", ").join("+");
-		var destinationAddress = destinationInput.value.split(", ").join("+");
+		var startAddress = startInput.value;
+		var destinationAddress = destinationInput.value;
 		sessionStorage.setItem('startAddress', startAddress);
 		sessionStorage.setItem('destinationAddress', destinationAddress);
 	}

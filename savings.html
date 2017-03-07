@@ -23,44 +23,31 @@
 
 	<div class="nav-line"></div>
 
-	<div class="first-panel-savings relative flex justify-start">
-		<!-- will this still be a form item on this page? also, need to move closer to left, make margin smaller? -->
-		<form class="flex-auto mw7 flex flex-column justify-start items-center">
-			<!-- how tall is this break? -->
-			<br>
-			<br>
-			<!--<label class="clip" for="start-address">Start Address</label>-->
-			<input class="start-input-savings f6 f5-l input-reset bn black-80 bg-white pa3 mb3 br2 shadow-1 w-50" type="text" placeholder="Enter your start address" name="start-address">
+	<div class="first-panel-savings relative">
+		<!-- <label class="clip" for="start-address">Start Address</label>
+		<input class="start-input-savings f6 f5-l input-reset bn black-80 bg-white pa3 mb3 br2 shadow-1 w-50" type="text" placeholder="Enter your start address" name="start-address">
 
-			<!--<label class="clip" for="destination-address">Destination Address</label>-->
-			<input class="destination-input-savings f6 f5-l input-reset bn black-80 bg-white pa3 br2 shadow-1 w-50" type="text" placeholder="Enter your destination address" name="destination-address">
-			<br>
-			<!-- need to refactor to move out of form container?-->
-			<article class="center mw4 mw6-ns br2 hidden ba b--black-10 mv4 bg-white w-50 shadow-1">
-				<div class="pa3 b--black-10">
-					<p class="f6 f5-ns lh-copy measure ml3">
-						Route checked.
-					</p>
-					<p class="f6 f5-ns lh-copy measure ml3">
-						15,000 miles driven per year*
-					</p>
-					<p class="f6 f5-ns lh-copy measure ml3">
-						$2,000 spent on gas per year*
-					</p>
-				</div>
-			</article>
+		<label class="clip" for="destination-address">Destination Address</label>
+		<input class="destination-input-savings f6 f5-l input-reset bn black-80 bg-white pa3 br2 shadow-1 w-50" type="text" placeholder="Enter your destination address" name="destination-address">
+		-->
 
-			<article class="center mw4 mw6-ns br2 hidden ba b--black-10 mv4 bg-white w-50 shadow-1">
-				<div class="pa3 b--black-10">
-					<h1 class="f4 bg-near-white br2 br--top black-60 mv0 mv0 pv1 ph3">$11,000 in savings</h1>
-					<p class="f6 f5-ns lh-copy measure-narrow ml3">
-						Using baseline comparisons of a 2017 Ford Focus EV to a 2017 Honda Accord.
-					</p>
-				</div>
-				<a class="f6 link dim br2 ph3 pv2 mb3 mr3 dib white bg-dark-blue fr" href="#0">BREAKDOWN</a>
-			</article>
-
-		</form>
+		<div class="w-75 center pv5 flex flex-column h-100 justify-around">
+			<div class="route-checked br2 shadow-2 bg-white flex flex-column w-30">
+				<h1 class="ma0 pt2 pl2 f4">Route Checked:</h1>
+				<h2 class="f5 pl2 start-address"></h2>
+				<h2 class="f5 pl2 ma0">to</h2>
+				<h2 class="f5 pl2 destination-address"></h2>
+			</div>
+			<div class="route-stats br2 shadow-2 bg-white h4 w-30">
+				<h1 class="ma0 pt2 pl2 f4">Route Stats:</h1>
+				<h2 class="f5 pl2">10,000 miles driven per year</h2>
+				<h2 class="f5 pl2">$2,000 spent on gas</h2>
+			</div>
+			<div class="route-savings br2 shadow-2 bg-white h4 w-30">
+				<h1 class="ma0 pt2 pl2 f4 green">$11,000 in yearly savings</h1>
+				<h2 class="f5 pl2">Using baseline comparisons of a 2017 Ford Focus EV to a 2017 Honda Accord.</h2>
+			</div>
+		</div>
 	</div>
 
 	<div class="second-panel-savings">

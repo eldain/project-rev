@@ -88,8 +88,8 @@ $(document).ready(function(){
 	var destinationAddress = sessionStorage.getItem('destinationAddress');
 
 	// Getting weird API error when trying to initialize these autocompletes
-	new google.maps.places.Autocomplete(startInputSavings);
-	new google.maps.places.Autocomplete(destinationInputSavings);
+	// new google.maps.places.Autocomplete(startInputSavings);
+	// new google.maps.places.Autocomplete(destinationInputSavings);
 
 	var commutesPerWeek;
 	var fullTankCost;
@@ -98,6 +98,12 @@ $(document).ready(function(){
 	// ------End Variables------
 
 	// ------Start Functions------
+	function loadAddressCard(start, end){
+		var startAddress = document.querySelector(".start-address");
+		var destinationAddress = document.querySelector(".destination-address");
+		startAddress.innerHTML = start.split("+").join(" ");
+		destinationAddress.innerHTML = end;
+	}
 	function commutesPerWeekHandler(event) {
 	    // You can use “this” to refer to the selected element.
 	    if(!event.target.value) alert('Please Select One');
@@ -113,8 +119,8 @@ $(document).ready(function(){
 	     //Find the distance
 	     var distanceService = new google.maps.DistanceMatrixService();
 	     distanceService.getDistanceMatrix({
-	        origins: [startAddress],
-	        destinations: [destinationAddress],
+	        origins: [startAddress.split(", ").join("+")],
+	        destinations: [destinationAddress.split(", ").join("+")],
 	        travelMode: google.maps.TravelMode.DRIVING,
 	        unitSystem: google.maps.UnitSystem.IMPERIAL,
 	        durationInTraffic: true,
@@ -126,18 +132,23 @@ $(document).ready(function(){
 	            console.log('Error:', status);
 	        } else {
 							console.log("The distance is: " + response.rows[0].elements[0].distance.text);
-							return response.rows[0].elements[0].distance.text;
+							var distance =  response.rows[0].elements[0].distance.text;
+							var numberOfMiles = Number(distance.split(" ")[0]);
+							console.log(typeof numberOfMiles);
+							console.log("10 Years: " + calculateYearlyMiles(numberOfMiles));
 	        }
 	    });
 	  }
+		function calculateYearlyMiles(distance){
+			return distance * 2 * 5 * 52 * 10; // * commutesPerWeek
+			// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
+		}
 		function calculateSavings(distance){
 			console.log(distance);
 			let gasCost = prices[0]["gasPrice"]; // per gallon
 			let electricityPrice = prices[0]["electricityPrice"]; // per kWH
-			let totalMiles = distance * 2  * 52 * 10; // * commutesPerWeek
 			// let gasCost = totalMiles * gasVehicles[0]["capacity"]
 			console.log(gasCost, electricityPrice, totalMiles);
-			// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
 			// cent per mile for gas vehicles * distance calculation from above
 			// cent per mile for eletric vehicle * distance calculation from above
 			// subtract
@@ -148,8 +159,7 @@ $(document).ready(function(){
 
 	// ------Start Function Calls and Event Listeners------
 	var distance = getDistance();
-
-	document.styleSheets[1].insertRule(`.first-panel-savings::after { background-image: url("${imageSource}"); }`, 0);
+	loadAddressCard(startAddress, destinationAddress);
 
 	commutesPerWeekInput.onchange=commutesPerWeekHandler;
 	fullTankCostInput.onchange=fullTankCostHandler;
