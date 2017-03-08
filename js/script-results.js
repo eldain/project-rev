@@ -176,9 +176,23 @@ $(document).ready(function(){
 
 
 
-	$('.click').on('click', function() {
+	$('#ford').on('click', function() {
 		window.location = "http://www.uci.edu"
 	});
 
+	$('#fiat').on('click', function() {
+		window.location = "http://www.uci.edu"
+	});
 
+	$('#nissan').on('click', function() {
+		window.location = "http://www.uci.edu"
+	});
+
+	$('#bmw').on('click', function() {
+		window.location = "http://www.uci.edu"
+	});
+
+	$('#tesla').on('click', function() {
+		window.location = "http://www.uci.edu"
+	});
 });
