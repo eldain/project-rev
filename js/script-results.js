@@ -6,7 +6,8 @@ var gasVehicles = [
 	"msrp": 23000,
     "monthlylease": 575,
 	"mpg": 32,
-    "capacity": 396, //12.4G tank capacity x 32MPG = 396.8 miles
+    "range": 396, //12.4G tank capacity x 32MPG = 396.8 miles
+		"tankcapacity": 12.4,
     "link": 'http://automobiles.honda.com/civic-sedan',
 	"notes": "sedan"
 	}
@@ -77,8 +78,9 @@ var prices = [
 
 $(document).ready(function(){
 	// ------Start Variables------
-	var startInputSavings = document.querySelector('.start-input-savings');
-	var destinationInputSavings = document.querySelector('.destination-input-savings');
+	var milesPerYearIndicator = document.querySelector('.miles-per-year');
+	var spentPerYearIndicator = document.querySelector('.spent-per-year');
+	var savingsIndicatorFirstPanel = document.querySelector('.savings-first-panel');
 	var commutesPerWeekInput = document.querySelector('#commutes-per-week');
 	var fullTankCostInput = document.querySelector('#fill-up-cost');
 
@@ -87,17 +89,14 @@ $(document).ready(function(){
 	var startAddress = sessionStorage.getItem('startAddress');
 	var destinationAddress = sessionStorage.getItem('destinationAddress');
 
-	// Getting weird API error when trying to initialize these autocompletes
-	// new google.maps.places.Autocomplete(startInputSavings);
-	// new google.maps.places.Autocomplete(destinationInputSavings);
-
 	var commutesPerWeek;
 	var fullTankCost;
-
-	var imageSource = `http://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=11&size=960x960&key=AIzaSyD4u8OfeiUVGO3leigttTSnvFSgDznwZtA`;
 	// ------End Variables------
 
 	// ------Start Functions------
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 	function loadAddressCard(start, end){
 		var startAddress = document.querySelector(".start-address");
 		var destinationAddress = document.querySelector(".destination-address");
@@ -114,46 +113,56 @@ $(document).ready(function(){
 		if(!event.target.value) alert('Please Select One');
 		else fullTankCost = event.target.value;
 	}
-	function getDistance()
-	  {
-	     //Find the distance
-	     var distanceService = new google.maps.DistanceMatrixService();
-	     distanceService.getDistanceMatrix({
-	        origins: [startAddress.split(", ").join("+")],
-	        destinations: [destinationAddress.split(", ").join("+")],
-	        travelMode: google.maps.TravelMode.DRIVING,
-	        unitSystem: google.maps.UnitSystem.IMPERIAL,
-	        durationInTraffic: true,
-	        avoidHighways: false,
-	        avoidTolls: false
-	    },
-	    function (response, status) {
-	        if (status !== google.maps.DistanceMatrixStatus.OK) {
-	            console.log('Error:', status);
-	        } else {
-							console.log("The distance is: " + response.rows[0].elements[0].distance.text);
-							var distance =  response.rows[0].elements[0].distance.text;
-							var numberOfMiles = Number(distance.split(" ")[0]);
-							console.log(typeof numberOfMiles);
-							console.log("10 Years: " + calculateYearlyMiles(numberOfMiles));
-	        }
-	    });
-	  }
-		function calculateYearlyMiles(distance){
-			return distance * 2 * 5 * 52 * 10; // * commutesPerWeek
-			// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
-		}
-		function calculateSavings(distance){
-			console.log(distance);
-			let gasCost = prices[0]["gasPrice"]; // per gallon
-			let electricityPrice = prices[0]["electricityPrice"]; // per kWH
-			// let gasCost = totalMiles * gasVehicles[0]["capacity"]
-			console.log(gasCost, electricityPrice, totalMiles);
-			// cent per mile for gas vehicles * distance calculation from above
-			// cent per mile for eletric vehicle * distance calculation from above
-			// subtract
-			// cost of tank / range of tank * total miles
-		}
+	function getDistance(){
+   	//Find the distance
+   	var distanceService = new google.maps.DistanceMatrixService();
+   	distanceService.getDistanceMatrix({
+      origins: [startAddress.split(", ").join("+")],
+      destinations: [destinationAddress.split(", ").join("+")],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.IMPERIAL,
+      durationInTraffic: true,
+      avoidHighways: false,
+      avoidTolls: false
+	  },
+	  function (response, status) {
+      if (status !== google.maps.DistanceMatrixStatus.OK) {
+        console.log('Error:', status);
+      } else {
+				console.log("The distance is: " + response.rows[0].elements[0].distance.text);
+				var distance =  response.rows[0].elements[0].distance.text;
+				var numberOfMiles = Number(distance.split(" ")[0]);
+				var totalMiles = MilesPerYear(numberOfMiles, 5, 3);
+				var gasCost = calculateYearlyGasCost(totalMiles);
+				var eCost = calculateYearlyECost(totalMiles);
+				var savings = +(gasCost - eCost).toFixed(2);
+				populateFirstPanel(totalMiles, gasCost, savings);
+      }
+	  });
+  }
+	function MilesPerYear(distance, timesPerWeek, years){
+		return distance * 2 * timesPerWeek * 52 * years; // * commutesPerWeek
+		// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
+	}
+	function calculateYearlyGasCost(totalMiles){
+		let gasPrice = prices[0]["gasPrice"]; // per gallon
+		let tankCost = gasPrice * gasVehicles[0]["tankcapacity"];
+		let pricePerMileGas = tankCost / gasVehicles[0]["range"];
+		let gasCost = totalMiles * pricePerMileGas;
+		return +(gasCost).toFixed(2);
+	}
+	function calculateYearlyECost(totalMiles){
+		let electricityPrice = prices[0]["electricityPrice"]; // per kWH
+		let eTankCost = electricityPrice * electricVehicles[1]["batterycapacity"];
+		let pricePerMileE = eTankCost / electricVehicles[1]["range"];
+		let electricityCost = totalMiles * pricePerMileE;
+		return +(electricityCost).toFixed(2);
+	}
+	function populateFirstPanel(miles, gasCost, savings){
+		milesPerYearIndicator.innerHTML = numberWithCommas(miles);
+		spentPerYearIndicator.innerHTML = numberWithCommas(gasCost);
+		savingsIndicatorFirstPanel.innerHTML = numberWithCommas(savings);
+	}
 	// ------End Functions------
 
 
