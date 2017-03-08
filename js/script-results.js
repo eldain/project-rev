@@ -173,4 +173,12 @@ $(document).ready(function(){
 	commutesPerWeekInput.onchange=commutesPerWeekHandler;
 	fullTankCostInput.onchange=fullTankCostHandler;
 	// ------End Function Calls and Event Listeners------
+
+
+
+	$('.click').on('click', function() {
+		window.location = "http://www.uci.edu"
+	});
+
+
 });
