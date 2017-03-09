@@ -177,22 +177,22 @@ $(document).ready(function(){
 
 
 	$('#ford').on('click', function() {
-		window.location = "http://www.uci.edu"
+		window.location = "http://www.ford.com/cars/focus/2017/models/focus-electric/"
 	});
 
 	$('#fiat').on('click', function() {
-		window.location = "http://www.uci.edu"
+		window.location = "http://www.fiatusa.com/en/500e/"
 	});
 
 	$('#nissan').on('click', function() {
-		window.location = "http://www.uci.edu"
+		window.location = "https://www.nissanusa.com/electric-cars/leaf/"
 	});
 
 	$('#bmw').on('click', function() {
-		window.location = "http://www.uci.edu"
+		window.location = "https://www.bmwusa.com/vehicles/bmwi.html"
 	});
 
 	$('#tesla').on('click', function() {
-		window.location = "http://www.uci.edu"
+		window.location = "https://www.tesla.com/models"
 	});
 });
