@@ -69,12 +69,12 @@ var electricVehicles = [
 		"notes": 'luxury sedan'
 	}
 ];
-var prices = [
-	{
-		"gasPrice": 2.284, // National Average Gas Price as of 2/15/2017
-		"electricityPrice": 0.12 // kWH - National average of 12 cents that the EPA uses on its fuel economy label for EVs
-	}
-];
+// var prices = [
+// 	{
+// 		"gasPrice": 2.284, // National Average Gas Price as of 2/15/2017
+// 		"electricityPrice": 0.12 // kWH - National average of 12 cents that the EPA uses on its fuel economy label for EVs
+// 	}
+// ];
 
 $(document).ready(function(){
 	// ------Start Variables------
@@ -83,6 +83,7 @@ $(document).ready(function(){
 	var savingsIndicatorFirstPanel = document.querySelector('.savings-first-panel');
 	var commutesPerWeekInput = document.querySelector('#commutes-per-week');
 	var fullTankCostInput = document.querySelector('#fill-up-cost');
+	var gasPriceIndicator = document.querySelector(".gas-price-indicator");
 	var leaseButton = document.querySelector(".lease-button");
 	var upfrontButton = document.querySelector(".upfront-button");
 
@@ -93,8 +94,9 @@ $(document).ready(function(){
 
 	var numberOfMiles;
 	var commutesPerWeek = 5;
-	var fullTankCost;
 	var timeFrame = 3;
+	var gasPrice = 2.284;
+	var electricityPrice = 0.12;
 	// ------End Variables------
 
 	// ------Start Functions------
@@ -116,7 +118,13 @@ $(document).ready(function(){
 	function fullTankCostHandler(event){
 		// You can use “this” to refer to the selected element.
 		if(!event.target.value) alert('Please Select One');
-		else fullTankCost = event.target.value;
+		else gasPrice = event.target.value;
+		if(gasPrice % 1 != 0){
+			gasPriceIndicator.innerHTML = "$" + gasPrice + "0"
+		}else{
+			gasPriceIndicator.innerHTML = "$" + gasPrice + ".00"
+		}
+		allTogether(numberOfMiles);
 	}
 	function getDistance(){
    	//Find the distance
@@ -146,14 +154,14 @@ $(document).ready(function(){
 		// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
 	}
 	function calculateYearlyGasCost(totalMiles){
-		let gasPrice = prices[0]["gasPrice"]; // per gallon
+		// let thisGasPrice = gasPrice; // per gallon
 		let tankCost = gasPrice * gasVehicles[0]["tankcapacity"];
 		let pricePerMileGas = tankCost / gasVehicles[0]["range"];
 		let gasCost = totalMiles * pricePerMileGas;
 		return +(gasCost).toFixed(2);
 	}
 	function calculateYearlyECost(totalMiles){
-		let electricityPrice = prices[0]["electricityPrice"]; // per kWH
+		// let thisElectricityPrice = electricityPrice; // per kWH
 		let eTankCost = electricityPrice * electricVehicles[1]["batterycapacity"];
 		let pricePerMileE = eTankCost / electricVehicles[1]["range"];
 		let electricityCost = totalMiles * pricePerMileE;
@@ -183,7 +191,7 @@ $(document).ready(function(){
 	loadAddressCard(startAddress, destinationAddress);
 
 	commutesPerWeekInput.onchange=commutesPerWeekHandler;
-	fullTankCostInput.onchange=fullTankCostHandler;
+	fullTankCostInput.oninput=fullTankCostHandler;
 	leaseButton.addEventListener("click", (e) => {
 		timeFrame = 3;
 		upfrontButton.querySelector("label").classList.remove("bg-blue");
