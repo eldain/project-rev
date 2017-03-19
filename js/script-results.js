@@ -83,6 +83,8 @@ $(document).ready(function(){
 	var savingsIndicatorFirstPanel = document.querySelector('.savings-first-panel');
 	var commutesPerWeekInput = document.querySelector('#commutes-per-week');
 	var fullTankCostInput = document.querySelector('#fill-up-cost');
+	var leaseButton = document.querySelector(".lease-button");
+	var upfrontButton = document.querySelector(".upfront-button");
 
 	// Should probably remove the start address and destination address after plugging them into API, that way we won't run into any weird errors when reassigning session variables
 	var location = sessionStorage.getItem('location');
@@ -158,9 +160,13 @@ $(document).ready(function(){
 		return +(electricityCost).toFixed(2);
 	}
 	function populateFirstPanel(miles, gasCost, savings){
+		var firstYearIndicator = document.querySelector(".first-year-indicator");
+		var secondYearIndicator = document.querySelector(".second-year-indicator");
 		milesPerYearIndicator.innerHTML = numberWithCommas(miles);
+		firstYearIndicator.innerHTML = timeFrame;
 		spentPerYearIndicator.innerHTML = numberWithCommas(gasCost);
 		savingsIndicatorFirstPanel.innerHTML = numberWithCommas(savings);
+		secondYearIndicator.innerHTML = timeFrame;
 	}
 	function allTogether(distance){
 		var totalMiles = MilesPerYear(distance);
@@ -178,27 +184,28 @@ $(document).ready(function(){
 
 	commutesPerWeekInput.onchange=commutesPerWeekHandler;
 	fullTankCostInput.onchange=fullTankCostHandler;
-	// ------End Function Calls and Event Listeners------
-
-
-
+	leaseButton.addEventListener("click", () => {
+		timeFrame = 3;
+		allTogether(numberOfMiles);
+	});
+	upfrontButton.addEventListener("click", () => {
+		timeFrame = 10;
+		allTogether(numberOfMiles);
+	});
 	$('#ford').on('click', function() {
 		window.location = "http://www.ford.com/cars/focus/2017/models/focus-electric/"
 	});
-
 	$('#fiat').on('click', function() {
 		window.location = "http://www.fiatusa.com/en/500e/"
 	});
-
 	$('#nissan').on('click', function() {
 		window.location = "https://www.nissanusa.com/electric-cars/leaf/"
 	});
-
 	$('#bmw').on('click', function() {
 		window.location = "https://www.bmwusa.com/vehicles/bmwi.html"
 	});
-
 	$('#tesla').on('click', function() {
 		window.location = "https://www.tesla.com/models"
 	});
+	// ------End Function Calls and Event Listeners------
 });
