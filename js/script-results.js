@@ -184,12 +184,18 @@ $(document).ready(function(){
 
 	commutesPerWeekInput.onchange=commutesPerWeekHandler;
 	fullTankCostInput.onchange=fullTankCostHandler;
-	leaseButton.addEventListener("click", () => {
+	leaseButton.addEventListener("click", (e) => {
 		timeFrame = 3;
+		upfrontButton.querySelector("label").classList.remove("bg-blue");
+		e.target.classList.remove("bg-blue");
+		e.target.classList.add("bg-blue");
 		allTogether(numberOfMiles);
 	});
-	upfrontButton.addEventListener("click", () => {
+	upfrontButton.addEventListener("click", (e) => {
 		timeFrame = 10;
+		leaseButton.querySelector("label").classList.remove("bg-blue");
+		e.target.classList.remove("bg-blue");
+		e.target.classList.add("bg-blue");
 		allTogether(numberOfMiles);
 	});
 	$('#ford').on('click', function() {
