@@ -169,7 +169,7 @@ $(document).ready(function(){
 		secondYearIndicator.innerHTML = timeFrame;
 	}
 	function allTogether(distance){
-		var totalMiles = MilesPerYear(distance);
+		var totalMiles = MilesPerYear(distance).toFixed(2);
 		var gasCost = calculateYearlyGasCost(totalMiles);
 		var eCost = calculateYearlyECost(totalMiles);
 		var savings = +(gasCost - eCost).toFixed(2);
