@@ -89,8 +89,10 @@ $(document).ready(function(){
 	var startAddress = sessionStorage.getItem('startAddress');
 	var destinationAddress = sessionStorage.getItem('destinationAddress');
 
-	var commutesPerWeek;
+	var numberOfMiles;
+	var commutesPerWeek = 5;
 	var fullTankCost;
+	var timeFrame = 3;
 	// ------End Variables------
 
 	// ------Start Functions------
@@ -107,6 +109,7 @@ $(document).ready(function(){
 	    // You can use “this” to refer to the selected element.
 	    if(!event.target.value) alert('Please Select One');
 	    else commutesPerWeek = event.target.value;
+			allTogether(numberOfMiles);
 	}
 	function fullTankCostHandler(event){
 		// You can use “this” to refer to the selected element.
@@ -131,17 +134,13 @@ $(document).ready(function(){
       } else {
 				console.log("The distance is: " + response.rows[0].elements[0].distance.text);
 				var distance =  response.rows[0].elements[0].distance.text;
-				var numberOfMiles = Number(distance.split(" ")[0]);
-				var totalMiles = MilesPerYear(numberOfMiles, 5, 3);
-				var gasCost = calculateYearlyGasCost(totalMiles);
-				var eCost = calculateYearlyECost(totalMiles);
-				var savings = +(gasCost - eCost).toFixed(2);
-				populateFirstPanel(totalMiles, gasCost, savings);
+				numberOfMiles = Number(distance.split(" ")[0]);
+				allTogether(numberOfMiles);
       }
 	  });
   }
-	function MilesPerYear(distance, timesPerWeek, years){
-		return distance * 2 * timesPerWeek * 52 * years; // * commutesPerWeek
+	function MilesPerYear(distance){
+		return distance * 2 * commutesPerWeek * 52 * timeFrame; // * commutesPerWeek
 		// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
 	}
 	function calculateYearlyGasCost(totalMiles){
@@ -162,6 +161,13 @@ $(document).ready(function(){
 		milesPerYearIndicator.innerHTML = numberWithCommas(miles);
 		spentPerYearIndicator.innerHTML = numberWithCommas(gasCost);
 		savingsIndicatorFirstPanel.innerHTML = numberWithCommas(savings);
+	}
+	function allTogether(distance){
+		var totalMiles = MilesPerYear(distance);
+		var gasCost = calculateYearlyGasCost(totalMiles);
+		var eCost = calculateYearlyECost(totalMiles);
+		var savings = +(gasCost - eCost).toFixed(2);
+		populateFirstPanel(totalMiles, gasCost, savings);
 	}
 	// ------End Functions------
 
