@@ -153,17 +153,17 @@ $(document).ready(function(){
 		return distance * 2 * commutesPerWeek * 52 * timeFrame; // * commutesPerWeek
 		// distance * 2 (back and forth once a day) * X (number of times per week) * 52 weeks in a year * Y (number of years)
 	}
-	function calculateYearlyGasCost(totalMiles){
+	function calculateYearlyGasCost(totalMiles, index){
 		// let thisGasPrice = gasPrice; // per gallon
 		let tankCost = gasPrice * gasVehicles[0]["tankcapacity"];
 		let pricePerMileGas = tankCost / gasVehicles[0]["range"];
 		let gasCost = totalMiles * pricePerMileGas;
 		return +(gasCost).toFixed(2);
 	}
-	function calculateYearlyECost(totalMiles){
+	function calculateYearlyECost(totalMiles, index){
 		// let thisElectricityPrice = electricityPrice; // per kWH
-		let eTankCost = electricityPrice * electricVehicles[1]["batterycapacity"];
-		let pricePerMileE = eTankCost / electricVehicles[1]["range"];
+		let eTankCost = electricityPrice * electricVehicles[index]["batterycapacity"];
+		let pricePerMileE = eTankCost / electricVehicles[index]["range"];
 		let electricityCost = totalMiles * pricePerMileE;
 		return +(electricityCost).toFixed(2);
 	}
@@ -176,12 +176,32 @@ $(document).ready(function(){
 		savingsIndicatorFirstPanel.innerHTML = numberWithCommas(savings);
 		secondYearIndicator.innerHTML = timeFrame;
 	}
+	function populateThirdPanel(distance, gasCost){
+		var fordSavings = document.querySelector('.ford-savings');
+		var fiatSavings = document.querySelector('.fiat-savings');
+		var nissanSavings = document.querySelector('.nissan-savings');
+		var bmwSavings = document.querySelector('.bmw-savings');
+		var teslaSavings = document.querySelector('.tesla-savings');
+
+		var fordDifference = +(gasCost - calculateYearlyECost(distance, 1)).toFixed(2);
+		var fiatDifference = +(gasCost - calculateYearlyECost(distance, 2)).toFixed(2);
+		var nissanDifference = +(gasCost - calculateYearlyECost(distance, 3)).toFixed(2);
+		var bmwDifference = +(gasCost - calculateYearlyECost(distance, 0)).toFixed(2);
+		var teslaDifference = +(gasCost - calculateYearlyECost(distance, 4)).toFixed(2);
+
+		fordSavings.innerHTML = `$${numberWithCommas(fordDifference)}`;
+		fiatSavings.innerHTML = `$${numberWithCommas(fiatDifference)}`;
+		nissanSavings.innerHTML = `$${numberWithCommas(nissanDifference)}`;
+		bmwSavings.innerHTML = `$${numberWithCommas(bmwDifference)}`;
+		teslaSavings.innerHTML = `$${numberWithCommas(teslaDifference)}`;
+	}
 	function allTogether(distance){
 		var totalMiles = MilesPerYear(distance).toFixed(2);
-		var gasCost = calculateYearlyGasCost(totalMiles);
-		var eCost = calculateYearlyECost(totalMiles);
+		var gasCost = calculateYearlyGasCost(totalMiles, 0);
+		var eCost = calculateYearlyECost(totalMiles, 1);
 		var savings = +(gasCost - eCost).toFixed(2);
 		populateFirstPanel(totalMiles, gasCost, savings);
+		populateThirdPanel(totalMiles, gasCost);
 	}
 	// ------End Functions------
 
